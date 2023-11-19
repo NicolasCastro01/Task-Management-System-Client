@@ -1,0 +1,1 @@
+export { default as InputLabelTag } from "./input-label";
