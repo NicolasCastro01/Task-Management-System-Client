@@ -1,17 +1,14 @@
-import { HTMLInputTypeAttribute, useState } from "react";
+import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 
 interface InputLabelProps {
     label: string;
     id: string;
-    type: HTMLInputTypeAttribute
+    type?: HTMLInputTypeAttribute,
+    onInput: (event: ChangeEvent<HTMLInputElement>) => void;
+    value: string | number;
 }
 
-export default function InputLabel({ label, type, id }: InputLabelProps) {
-    const [value, setValue] = useState<string | number>('');
-    
-    const handleValue = (value: string | number) => {
-        setValue(value);
-    }
+export default function InputLabel({ label, type = 'text', id, onInput, value }: InputLabelProps) {
     
     return (
         <>
@@ -20,19 +17,22 @@ export default function InputLabel({ label, type, id }: InputLabelProps) {
                 id={id} 
                 type={type} 
                 className="
-                    bg-transparent
+                    bg-slate-500
+                    bg-opacity-50
                     outline-none 
                     rounded-xl 
                     p-2 
                     shadow-2xl
-                    hover:shadow-md
-                    focus:shadow-md
+                    shadow-slate-900
+                    hover:shadow-lg
+                    focus:shadow-lg
                     transition-all
                     caret-slate-300
                     selection:bg-slate-900
                 " 
-                onChange={(event) => handleValue(event.target.value)}
                 value={value}
+                onInput={onInput}
+                alt={`field-${label}`}
             />
         </>
     )
