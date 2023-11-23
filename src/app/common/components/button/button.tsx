@@ -2,9 +2,10 @@ interface ButtonProps {
     label: string;
     className?: string;
     onClick?: () => void;
+    disabled?: boolean;
 }
 
-export default function Button({ label, className, onClick }: ButtonProps) {
+export default function Button({ label, className, onClick, disabled = false }: ButtonProps) {
 
     return (
         <>
@@ -16,9 +17,11 @@ export default function Button({ label, className, onClick }: ButtonProps) {
                     shadow-2xl
                     hover:shadow-xl
                     transation-all
+                    disabled:opacity-50
                     ${className}
                 `}
                 onClick={onClick}
+                disabled={disabled}
             >{label}</button>
         </>
     )
