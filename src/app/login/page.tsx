@@ -23,8 +23,10 @@ export default function Login() {
     if(isEmail(state.email)) {
       const token = await sendUserCredential.run(state);
       localStorage.setItem('token', token.auth_token);
+      const user = await loadUserInfos.run(token.auth_token);
+      localStorage.setItem('user', JSON.stringify(user));
       
-      console.log(await loadUserInfos.run(token.auth_token));
+      window.location.href = "/home";
       setLoading(false);
       return;
     }
