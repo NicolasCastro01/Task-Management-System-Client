@@ -4,6 +4,7 @@ import { ButtonTag } from '../common/components/button';
 import { InputLabelTag } from '../common/components/input-label';
 import { ChangeEvent, useState } from 'react';
 import { UserCredentialsRegisterRequestDTO } from '~/@core/dtos/Request/auth/auth';
+import { makeSendUserCredentialsToRegister } from '~/@core/main/factories/usecases/auth';
 
 export default function Register() {
   const [state, setState] = useState<UserCredentialsRegisterRequestDTO>({
@@ -13,9 +14,17 @@ export default function Register() {
     password: ''
   });
   const router = useRouter();
+  const sendUserCredentialsToRegister = makeSendUserCredentialsToRegister();
 
-  const handleSubmit = () => {
-    alert("Signned!")
+  async function handleSubmit() {
+    if(isEmail(state.email) && isPasswordValid(state.password)) {
+      await sendUserCredentialsToRegister.run(state);
+
+      window.location.href = "/login";
+      return
+    }
+
+    alert("Invalid credentials.");
   }
 
   const handleState = (key: string, value: string): void => {
@@ -27,6 +36,14 @@ export default function Register() {
 
   const handleLoginButton = () => {
     return router.push('/login');
+  }
+
+  function isEmail(email: string): boolean {
+    return (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g).test(email);
+  }
+
+  function isPasswordValid(password: string): boolean {
+    return password.length >= 6;
   }
 
   return (
