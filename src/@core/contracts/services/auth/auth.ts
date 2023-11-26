@@ -6,20 +6,19 @@ export interface UserData {
     first_name: string;
     last_name: string;
     email: string;
-    tasks: Task[];
 }
 
-interface Task {
+export interface Task {
     props: TaskProps;
     id: number;
     _user_ref: number;
 }
 
-interface TaskProps {
+export interface TaskProps {
     title: string;
     description: string;
     status: Status;
-    finish_at: string;
+    finishAt: string;
 }
 
 interface Status {
