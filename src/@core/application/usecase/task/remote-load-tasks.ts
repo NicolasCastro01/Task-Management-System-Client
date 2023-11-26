@@ -1,4 +1,5 @@
 import { Axios } from "axios";
+import { TaskProps } from "~/@core/contracts/services/auth/auth";
 
 export class RemoteLoadTasks {
     constructor(
@@ -6,7 +7,7 @@ export class RemoteLoadTasks {
         private readonly url: string
     ) { }
 
-    async run(): Promise<any> {
+    async run(): Promise<TaskProps[]> {
         try {
             const token = localStorage.getItem('token') || '';
             const tasks = await this.axios.get(this.url, {
@@ -15,7 +16,7 @@ export class RemoteLoadTasks {
                 }
             });
             
-            return tasks.data as any;
+            return tasks.data as TaskProps[];
         } catch (error) {
             throw new Error("User not found.")
         }
