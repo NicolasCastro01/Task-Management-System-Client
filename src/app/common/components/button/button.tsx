@@ -11,13 +11,13 @@ export default function Button({ label, className, onClick, disabled = false }: 
         <>
             <button
                 className={`
-                bg-slate-900
                     rounded-xl
                     p-2
                     shadow-2xl
                     hover:shadow-xl
                     transation-all
                     disabled:opacity-50
+                    disabled:animate-pulse
                     ${className}
                 `}
                 onClick={onClick}

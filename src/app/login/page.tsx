@@ -25,7 +25,7 @@ export default function Login() {
       localStorage.setItem('token', token.auth_token);
       const user = await loadUserInfos.run(token.auth_token);
       localStorage.setItem('user', JSON.stringify(user));
-      
+
       window.location.href = "/home";
       setLoading(false);
       return;
@@ -84,6 +84,7 @@ export default function Login() {
                 label="SignIn"
                 onClick={handleSubmit}
                 disabled={loading}
+                className="bg-slate-900"
               />
             </div>
           </div>

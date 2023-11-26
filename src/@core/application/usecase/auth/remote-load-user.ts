@@ -25,21 +25,7 @@ export class RemoteLoadUser {
         const userData: UserData = {
             first_name,
             last_name,
-            email,
-            tasks: tasks.map(task => ({ 
-                props: { 
-                    title: task.props.title,
-                    description: task.props.description,
-                    status: {
-                        props: {
-                            description: task.props.status.props.description
-                        }
-                    },
-                    finish_at: task.props.finishAt
-                }, 
-                id: task.id, 
-                _user_ref: task._userRef
-            }))
+            email
         };
         
         return userData;

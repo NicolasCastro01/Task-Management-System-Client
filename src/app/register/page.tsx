@@ -91,6 +91,7 @@ export default function Register() {
               <ButtonTag
                 label="SignUp"
                 onClick={handleSubmit}
+                className="bg-slate-900"
               />  
             </div>
           </div>
