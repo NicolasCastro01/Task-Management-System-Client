@@ -12,7 +12,7 @@ export default function InputLabel({ label, type = 'text', id, onInput, value }:
     
     return (
         <>
-            <label htmlFor={id}>{label}</label>
+            <label htmlFor={id} className="text-white">{label}</label>
             <input 
                 id={id} 
                 type={type} 
@@ -29,6 +29,7 @@ export default function InputLabel({ label, type = 'text', id, onInput, value }:
                     transition-all
                     caret-slate-300
                     selection:bg-slate-900
+                    text-white
                 " 
                 value={value}
                 onInput={onInput}
