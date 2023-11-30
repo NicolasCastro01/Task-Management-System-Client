@@ -15,6 +15,7 @@ export interface Task {
 }
 
 export interface TaskProps {
+    id: number;
     title: string;
     description: string;
     status: Status;
@@ -36,7 +37,7 @@ export interface UserDataAPIResponse {
     tasks: TaskAPIResponse[];
 }
 
-interface TaskAPIResponse {
+export interface TaskAPIResponse {
     props: TaskPropsAPIResponse;
     id: number;
     _userRef: number;
