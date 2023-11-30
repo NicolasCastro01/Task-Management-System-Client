@@ -1,16 +1,15 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { TaskProps, UserData } from '~/@core/contracts/services/auth/auth';
+import { TaskAPIResponse, UserData } from '~/@core/contracts/services/auth/auth';
 import { ButtonTag } from '../common/components/button';
 import { ModalTaskTag } from './components/modal-task';
 import { makeLoadTasks } from '~/@core/main/factories/usecases/task/load-tasks';
-import { TaskTag } from './components/task';
 import { ListTaskTag } from './components/list-task';
 
 export default function Home() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [user, setUser] = useState<UserData | null>(null);
-  const [userTasks, setUserTasks] = useState<TaskProps[]>([]);
+  const [userTasks, setUserTasks] = useState<TaskAPIResponse[]>([]);
   const loadTasksService = makeLoadTasks();
 
   const getUser = () => {
