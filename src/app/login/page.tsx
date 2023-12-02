@@ -26,7 +26,7 @@ export default function Login() {
       const user = await loadUserInfos.run(token.auth_token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      window.location.href = "/home";
+      router.push("/home");
       setLoading(false);
       return;
     }

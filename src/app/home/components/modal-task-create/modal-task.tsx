@@ -1,16 +1,19 @@
+import { InputLabelTag } from "~/app/common/components/input-label";
+import { ModalComponent } from "../modal";
 import { ChangeEvent, useEffect, useState } from "react";
+import { ButtonActionsTag } from "~/app/common/components/button-actions";
+import { ButtonTag } from "~/app/common/components/button";
 import { CreateTaskProps } from "~/@core/contracts/services/task/task";
 import { makeSendTask } from "~/@core/main/factories/usecases/task";
-import { ButtonTag } from "~/app/common/components/button";
-import { InputLabelTag } from "~/app/common/components/input-label";
 
 interface ModalTaskProps {
-    show?: boolean;
+    title: string;
+    show: boolean;
     onClose: () => void;
+    getTasks: () => void;
 }
 
-
-export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
+export default function ModalTask({ title, show, onClose, getTasks }: ModalTaskProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const [state, setState] = useState<CreateTaskProps>({
         title: '',
@@ -18,7 +21,7 @@ export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
         finish_at: new Date()
     });
     const sendTaskService = makeSendTask();
-    
+
     const handleState = (key: string, value: string): void => {
         setState(() => ({
             ...state,
@@ -31,10 +34,10 @@ export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
     }
 
     const handleSubmit = async () => {
-        if(!isNull(state.title) && !isNull(state.description) && !isNull(state.finish_at.toString())) {
+        if (!isNull(state.title) && !isNull(state.description) && !isNull(state.finish_at.toString())) {
             setLoading(true);
             await sendTaskService.run(state);
-            
+
             onClose();
             return;
         }
@@ -48,65 +51,29 @@ export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
     }
 
     useEffect(() => {
-        if(!show) {
+        if (!show) {
             setState({
                 title: '',
                 description: '',
                 finish_at: new Date()
             });
-            
+
             return
         }
     }, [show]);
 
+    useEffect(() =>{
+        getTasks();
+    }, [show === false])
+
     return (
         <>
-            <div
-                id="modal-main-container"
-                className={
-                    `
-                        absolute
-                        top-0
-                        left-0
-                        z-50
-                        w-full
-                        min-h-screen
-                        backdrop-blur-sm
-                        ${handleModal()}
-                        items-center
-                        justify-center
-                        animate
-                    `
-                }
-            >
-                <div
-                    id="modal-container"
-                    className="
-                        flex
-                        flex-col
-                        justify-center
-                        w-4/6
-                        h-80
-                        rounded-xl
-                        border-4
-                        border-white
-                        bg-slate-900
-                        transition-all
-                        p-4
-                        gap-4
-                    "
-                >
-                    <section id="form-header" className="flex items-center justify-center">
-                        <h1
-                            className="text-white font-bold"
-                        >Create task</h1>
-                    </section>
-                    <section id="form-body"
-                        className="
-                            flex
-                            flex-col
-                        "
-                    >
+            <ModalComponent.Main show={handleModal()}>
+                <ModalComponent.Container>
+                    <ModalComponent.Header>
+                        <ModalComponent.Title>{title}</ModalComponent.Title>
+                    </ModalComponent.Header>
+                    <ModalComponent.Body>
                         <InputLabelTag
                             id="title"
                             label="Title"
@@ -126,8 +93,9 @@ export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
                             value={state.finish_at.toString()}
                             type="date"
                         />
-                    </section>
-                    <section id="actions" className="flex items-center justify-between gap-4">
+                    </ModalComponent.Body>
+
+                    <ButtonActionsTag>
                         <ButtonTag label="cancel"
                             className="
                                 bg-red-800
@@ -150,9 +118,9 @@ export default function ModalTask({ show = false, onClose }: ModalTaskProps) {
                             onClick={handleSubmit}
                             disabled={loading}
                         />
-                    </section>
-                </div>
-            </div>
+                    </ButtonActionsTag>
+                </ModalComponent.Container>
+            </ModalComponent.Main>
         </>
     );
 }

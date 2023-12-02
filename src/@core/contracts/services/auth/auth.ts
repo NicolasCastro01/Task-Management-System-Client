@@ -43,7 +43,7 @@ export interface TaskAPIResponse {
     _userRef: number;
 }
 
-interface TaskPropsAPIResponse {
+export interface TaskPropsAPIResponse {
     title: string;
     description: string;
     status: StatusAPIResponse;

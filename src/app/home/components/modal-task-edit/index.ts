@@ -1,0 +1,1 @@
+export { default as ModalTaskEditTag } from "./modal-task"
