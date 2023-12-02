@@ -5,7 +5,7 @@ interface InputLabelProps {
     id: string;
     type?: HTMLInputTypeAttribute,
     onInput: (event: ChangeEvent<HTMLInputElement>) => void;
-    value: string | number;
+    value: string | number | Date;
 }
 
 export default function InputLabel({ label, type = 'text', id, onInput, value }: InputLabelProps) {
@@ -31,7 +31,7 @@ export default function InputLabel({ label, type = 'text', id, onInput, value }:
                     selection:bg-slate-900
                     text-white
                 " 
-                value={value}
+                value={value.toLocaleString()}
                 onInput={onInput}
                 alt={`field-${label}`}
             />

@@ -1,4 +1,4 @@
-import { Axios } from "axios";
+import { Axios, AxiosError } from "axios";
 import { TaskAPIResponse } from "~/@core/contracts/services/auth/auth";
 
 export class RemoteLoadTasks {
@@ -18,7 +18,7 @@ export class RemoteLoadTasks {
             
             return tasks.data as TaskAPIResponse[];
         } catch (error) {
-            throw new Error("User not found.")
+            throw error;
         }
     }
 }
