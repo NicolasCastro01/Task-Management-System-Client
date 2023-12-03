@@ -7,7 +7,7 @@ export default function Actions({ children }: ActionsProps) {
         <>
             <div 
                 id="actions"
-                className="absolute bottom-0 right-0 p-1 flex gap-2"
+                className="absolute bottom-0 right-0 p-1 flex gap-2 items-center"
             >
                 {children}
             </div>
