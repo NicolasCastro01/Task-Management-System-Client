@@ -1,15 +1,12 @@
-interface PenProps {
-    widht?: number;
-    height?: number;
-    fill?: string;
-    onClick?: () => void;
-}
+import { IconBaseProps } from "./interfaces/icon-props.interface";
 
-export default function Pen({ widht = 24, height = 24, onClick }: PenProps) {
+interface PenProps extends IconBaseProps { }
+
+export default function Pen({ width = 24, height = 24, onClick }: PenProps) {
     return(
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            width={widht}
+            width={width}
             height={height}
             onClick={onClick}
             viewBox="0 0 24 24" 
