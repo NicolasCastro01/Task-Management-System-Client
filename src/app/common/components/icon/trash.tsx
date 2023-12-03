@@ -1,9 +1,6 @@
-interface TrashProps {
-    width?: number;
-    height?: number;
-    fill?: string;
-    onClick?: () => void;
-}
+import { IconBaseProps } from "./interfaces/icon-props.interface";
+
+interface TrashProps extends IconBaseProps { };
 
 export default function Trash({width = 24, height = 24, onClick}: TrashProps) {
     return (
