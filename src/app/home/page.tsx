@@ -6,11 +6,9 @@ import { ButtonTag } from '../common/components/button';
 import { makeLoadTasks } from '~/@core/main/factories/usecases/task/load-tasks';
 import { ListTaskTag } from './components/list-task';
 import { ModalTaskCreateTag } from './components/modal-task-create';
-import { makeDeleteTask } from '~/@core/main/factories/usecases/task/delete-task';
 
 export default function Home() {
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<UserData | null>(null);
   const [userTasks, setUserTasks] = useState<TaskAPIResponse[]>([]);
   const loadTasksService = makeLoadTasks();
@@ -52,9 +50,6 @@ export default function Home() {
 
   useEffect(() => {
     getUser();
-  }, []);
-
-  useEffect(() => {
     getTasks();
   }, []);
 
