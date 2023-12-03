@@ -50,7 +50,7 @@ export interface TaskPropsAPIResponse {
     finishAt: string;
 }
 
-interface StatusAPIResponse {
+export interface StatusAPIResponse {
     props: StatusPropsAPIResponse;
 }
 
